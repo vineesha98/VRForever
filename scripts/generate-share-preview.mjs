@@ -7,15 +7,11 @@ import { dirname, resolve } from "node:path";
 const input = resolve("public/assets/art/engraving.webp");
 const output = resolve("public/assets/share-preview.jpg");
 
-let sharp;
-try {
-  sharp = (await import("sharp")).default;
-} catch {
-  execFileSync("npm", ["install", "--no-save", "--no-package-lock", "--ignore-scripts=false", "sharp@0.34.4"], {
-    stdio: "inherit",
-  });
-  sharp = (await import("sharp")).default;
-}
+// Install before resolving the module; Node's ESM loader caches failed resolutions.
+execFileSync("npm", ["install", "--no-save", "--no-package-lock", "sharp@0.34.4"], {
+  stdio: "inherit",
+});
+const sharp = (await import("sharp")).default;
 
 await mkdir(dirname(output), { recursive: true });
 await sharp(input)
