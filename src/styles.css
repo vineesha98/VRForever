@@ -786,15 +786,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   transition: transform .17s cubic-bezier(.5, 0, 1, .6), opacity .08s;
 }
 
-.gift {
-  margin-top: 26px;
-  opacity: 0;
-  transform: translateY(14px);
-}
-.thanks.is-stamped .gift { opacity: 1; transform: none; transition: opacity .9s .5s, transform 1s var(--ease-out) .5s; }
-.gift-line { font-style: italic; margin-bottom: .7em; }
-.gift img { width: 100%; box-shadow: 0 8px 18px -8px rgba(30, 20, 18, .5); }
-
 .link {
   margin-top: 18px;
   text-decoration: underline;
