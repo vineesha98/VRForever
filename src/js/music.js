@@ -3,7 +3,7 @@
 (function () {
   const audio = document.createElement("audio");
   audio.id = "weddingSoundtrack";
-  audio.src = "/assets/music.mp3";
+  audio.src = "/assets/Sakhiye.mp3";
   audio.preload = "auto";
   audio.loop = true;
   audio.volume = 0.65;
