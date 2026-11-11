@@ -350,7 +350,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   position: relative;
   width: min(100%, 390px, 43svh);
   aspect-ratio: 1 / .9;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
   container-type: inline-size;
 }
 .table-strip {
@@ -842,7 +842,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* Keep the red invitation, envelope, location and full countdown in one mobile viewport. */
 @media (max-height: 650px) {
   .hero { padding-block: 12px; }
-  .flatlay { width: min(100%, 350px, 37svh); margin-bottom: 2px; }
+  .flatlay { width: min(100%, 350px, 37svh); margin-bottom: 10px; }
   .place { font-size: clamp(34px, 9vw, 54px); }
   .when { font-size: .9rem; }
   .lead-count { margin-top: .45em; }
