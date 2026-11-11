@@ -26,5 +26,6 @@ window.SITE = {
     { src: "moment-2", w: 3, h: 4, caption: "Brunch, then forever.", alt: "Ritvik and Vineesha outside a cafe under pink bougainvillea" },
     { src: "moment-4", w: 4, h: 3, caption: "Golden hour, and neither of us letting go.", alt: "Ritvik smiling as Vineesha hugs him, both in white, against a golden hillside" },
     { src: "moment-5", w: 4, h: 3, caption: "Arm's length is as far apart as we get.", alt: "Selfie of Vineesha in a gold blouse and Ritvik in a lavender shirt" },
+    { src: "moment-6", w: 3, h: 4, caption: "Celebrating big moments together", alt: "Ritvik and Vineesha smiling together in a nighttime selfie" },
   ],
 };
