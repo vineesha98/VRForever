@@ -3,9 +3,20 @@
 (function () {
   const audio = document.createElement("audio");
   audio.id = "weddingSoundtrack";
-  audio.src = "/assets/music.mp3";
+  audio.src = "/assets/Sakhiye.mp3";
   audio.preload = "auto";
-  audio.loop = true;
+  // Loop only the first 34 seconds of Sakhiye.
+  const CLIP_SECONDS = 34;
+  audio.loop = false;
+  audio.addEventListener("timeupdate", () => {
+    if (audio.currentTime >= CLIP_SECONDS) {
+      audio.currentTime = 0;
+      if (!audio.paused) {
+        const replay = audio.play();
+        if (replay && typeof replay.catch === "function") replay.catch(() => {});
+      }
+    }
+  });
   audio.volume = 0.65;
   audio.playsInline = true;
   document.body.appendChild(audio);
