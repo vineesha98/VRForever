@@ -497,6 +497,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   color: var(--card-ink);
   box-shadow: 0 20px 35px -16px rgba(12, 5, 8, .65);
 }
+/* Slightly shorter red Wedding card; other event cards remain unchanged. */
+.event-wedding .event-card { aspect-ratio: 4 / 7.0; }
 /* Keep the original photo at the TOP, with a gentler crop and no overlay on faces. */
 .event .tile {
   position: absolute;
