@@ -164,7 +164,6 @@
 
   /* ---------- Hero: map, postcard, stamp, countdown ---------- */
 
-  $("mapLink").href = SITE.mapUrl;
 
   const postcard = $("postcard");
   function turnPostcard() {
