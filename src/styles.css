@@ -342,6 +342,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   padding: clamp(16px, 3svh, 32px) 16px;
   text-align: center;
   overflow: hidden;
+  /* Let the red invitation gently melt into the yellow Haldi below. */
+  background-image: url("/assets/grain.png"),
+    linear-gradient(to bottom, var(--sindoor) 0%, var(--sindoor) calc(100% - 125px),
+      #b34a28 calc(100% - 66px), var(--haldi) 100%);
 }
 
 /* The strip from the sleeve, now lying on the table beside the postcard.
@@ -484,6 +488,24 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+/* Festive string of warm bulbs across the transition, not a hard border. */
+.event-haldi::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: -4%;
+  width: 108%;
+  height: 28px;
+  z-index: 1;
+  pointer-events: none;
+  border-top: 1.5px solid rgba(89, 39, 24, .56);
+  border-radius: 50% 50% 0 0;
+  background: radial-gradient(circle at 23px 9px,
+    #fff8d8 0 3px, #ffc958 4px 6px,
+    rgba(255, 220, 109, .42) 7px 10px, transparent 13px)
+    left top / 46px 28px repeat-x;
+  opacity: .92;
 }
 .event .event-card {
   position: relative;
