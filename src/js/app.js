@@ -305,43 +305,63 @@
     film.append(print);
   });
 
-  // It runs on its own, pauses while someone swipes, drags or hovers,
-  // and carries on from wherever they left it.
-  const SPEED = 26; // pixels a second
+  // Glide through every photo, turn around at each end, and resume after swipes.
+  // Keep the automatic movement predictable rather than pausing on hover/focus.
+  const SPEED = 42; // pixels per second
   let pos = 0;
   let direction = 1;
   let last = 0;
   let restAt = 0;
-  let hovering = false;
   let running = 0;
-  const hold = (ms = 2600) => { restAt = performance.now() + ms; };
+  let dragFrom = null;
+  const hold = (ms = 950) => { restAt = performance.now() + ms; };
 
   function drift(now) {
     running = requestAnimationFrame(drift);
     const dt = last ? Math.min(now - last, 64) : 0;
     last = now;
-    if (hovering || dragFrom || now < restAt) { pos = film.scrollLeft; return; }
     const maxScroll = Math.max(0, film.scrollWidth - film.clientWidth);
     if (maxScroll < 1) return;
-    pos += (direction * SPEED * dt) / 1000;
-    if (pos >= maxScroll) { pos = maxScroll; direction = -1; hold(1400); }
-    if (pos <= 0) { pos = 0; direction = 1; hold(1400); }
+    if (dragFrom || now < restAt) {
+      pos = film.scrollLeft;
+      return;
+    }
+
+    // Respect the actual scroll position after touch swipes or window resizing.
+    if (Math.abs(film.scrollLeft - pos) > 3) pos = film.scrollLeft;
+    pos += direction * SPEED * dt / 1000;
+    if (pos >= maxScroll) {
+      pos = maxScroll;
+      direction = -1;
+      hold(450);
+    } else if (pos <= 0) {
+      pos = 0;
+      direction = 1;
+      hold(450);
+    }
     film.scrollLeft = pos;
   }
-  function startDrift() { if (!running && !still) { last = 0; pos = film.scrollLeft; running = requestAnimationFrame(drift); } }
-  function stopDrift() { cancelAnimationFrame(running); running = 0; }
+  function startDrift() {
+    if (!running && !still) {
+      last = 0;
+      pos = film.scrollLeft;
+      running = requestAnimationFrame(drift);
+    }
+  }
+  function stopDrift() {
+    cancelAnimationFrame(running);
+    running = 0;
+  }
   new IntersectionObserver((entries) => (entries[0].isIntersecting ? startDrift() : stopDrift())).observe(film);
 
-  ["touchstart", "wheel", "keydown"].forEach((type) => film.addEventListener(type, () => hold(), { passive: true }));
+  ["touchstart", "wheel", "keydown"].forEach((type) =>
+    film.addEventListener(type, () => hold(), { passive: true })
+  );
   film.addEventListener("touchend", () => hold(), { passive: true });
-  film.addEventListener("focus", () => hold(4000));
-  film.addEventListener("mouseenter", () => { hovering = true; });
-  film.addEventListener("mouseleave", () => { hovering = false; hold(600); });
 
-  // Mouse users can drag the row.
-  let dragFrom = null;
+  // Mouse dragging also releases on cancelled pointers or leaving the window.
   film.addEventListener("pointerdown", (e) => {
-    if (e.pointerType !== "mouse") return;
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
     dragFrom = { x: e.clientX, left: film.scrollLeft };
   });
   addEventListener("pointermove", (e) => {
@@ -350,11 +370,14 @@
     if (Math.abs(moved) > 4) film.classList.add("is-dragging");
     film.scrollLeft = dragFrom.left - moved;
   });
-  addEventListener("pointerup", () => {
-    if (dragFrom) hold(1200);
+  function finishDrag() {
+    if (dragFrom) hold(850);
     dragFrom = null;
     film.classList.remove("is-dragging");
-  });
+  }
+  addEventListener("pointerup", finishDrag);
+  addEventListener("pointercancel", finishDrag);
+  addEventListener("blur", finishDrag);
   film.addEventListener("dragstart", (e) => e.preventDefault());
 
   /* ---------- The reply card ---------- */
