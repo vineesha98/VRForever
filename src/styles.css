@@ -52,7 +52,7 @@ main > [data-scene] {
 }
 main > .opening { background-image: none; }
 .hero               { --from: #1c1b1a; --blend: 90px; }
-.event-haldi        { --from: var(--sindoor); --blend: 110px; }
+.event-haldi        { --from: var(--haldi); --blend: 0px; }
 .event-sangeeth     { --from: var(--haldi); --blend: 110px; }
 .event-wedding      { --from: var(--night); --blend: 110px; }
 .reel               { --from: var(--kumkum); --blend: 90px; }
@@ -337,7 +337,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .hero {
   position: relative;
   display: flex; flex-direction: column; align-items: center;
-  min-height: 100svh;
+  min-height: 88svh;
   justify-content: center;
   padding: clamp(16px, 3svh, 32px) 16px;
   text-align: center;
@@ -348,7 +348,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
    Everything is sized from the table's width, so it scales as one picture. */
 .flatlay {
   position: relative;
-  width: min(100%, 390px, 43svh);
+  width: min(100%, 390px, 36svh);
   aspect-ratio: 1 / .9;
   margin-bottom: 20px;
   container-type: inline-size;
@@ -842,7 +842,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* Keep the red invitation, envelope, location and full countdown in one mobile viewport. */
 @media (max-height: 650px) {
   .hero { padding-block: 12px; }
-  .flatlay { width: min(100%, 350px, 37svh); margin-bottom: 10px; }
+  .flatlay { width: min(100%, 350px, 32svh); margin-bottom: 10px; }
   .place { font-size: clamp(34px, 9vw, 54px); }
   .when { font-size: .9rem; }
   .lead-count { margin-top: .45em; }
