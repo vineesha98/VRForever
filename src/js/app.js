@@ -389,13 +389,16 @@
   if (SITE.replyBy) $("replyBy").textContent = `Please reply by ${SITE.replyBy}.`;
 
   function setParty(n) {
-    party = Math.max(1, Math.min(12, n));
+    party = Math.max(1, Math.min(2, n));
     $("partyCount").textContent = party;
+    $("partyMinus").disabled = party === 1;
+    $("partyPlus").disabled = party === 2;
     Sound.init();
     Sound.tick();
   }
   $("partyMinus").addEventListener("click", () => setParty(party - 1));
   $("partyPlus").addEventListener("click", () => setParty(party + 1));
+  $("partyMinus").disabled = true;
 
   function readForm() {
     const data = new FormData(form);
@@ -423,8 +426,10 @@
     $("fName").value = saved.name || "";
     $("fContact").value = saved.contact || "";
     $("fNote").value = saved.note || "";
-    party = saved.party || 1;
+    party = Math.max(1, Math.min(2, Number(saved.party) || 1));
     $("partyCount").textContent = party;
+    $("partyMinus").disabled = party === 1;
+    $("partyPlus").disabled = party === 2;
     ["haldi", "sangeeth", "wedding"].forEach((name) => {
       const input = form.querySelector(`[name=${name}][value=${saved[name]}]`);
       if (input) input.checked = true;
