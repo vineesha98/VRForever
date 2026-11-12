@@ -214,14 +214,14 @@
             <em class="err" id="errAttend" hidden>Choose yes or no for each event.</em>
           </fieldset>
 
-          <div class="field party" id="partyField">
-            <span id="partyLabel">Guests in your party (maximum 2 per household)</span>
-            <div class="stepper" role="group" aria-labelledby="partyLabel">
-              <button type="button" id="partyMinus" aria-label="One fewer">&minus;</button>
-              <output id="partyCount">1</output>
-              <button type="button" id="partyPlus" aria-label="One more">+</button>
+          <fieldset class="plus-one" id="partyField">
+            <legend>Do you have a +1?</legend>
+            <div class="plus-one-options">
+              <label><input type="radio" name="plusOne" value="yes"><b>Yes</b></label>
+              <label><input type="radio" name="plusOne" value="no" checked><b>No</b></label>
             </div>
-          </div>
+            <p class="plus-one-note">Maximum 2 guests per household.</p>
+          </fieldset>
 
           <label class="field">
             <span>Phone or email, for the address and updates</span>
