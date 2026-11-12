@@ -750,7 +750,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .plus-one-options input:checked + b { background: var(--sindoor); color: var(--paper); border-color: var(--sindoor); }
 .plus-one-options input:focus-visible + b { outline: 2px solid var(--sindoor); outline-offset: 3px; }
-.plus-one-note { margin-top: .35em; font-size: .9rem; font-style: italic; opacity: .8; }
 
 .trap { position: absolute; left: -9999px; }
 
