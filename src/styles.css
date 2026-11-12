@@ -742,6 +742,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .party.is-muted { opacity: .4; }
 .party > span { margin: 0; }
 .stepper { display: flex; align-items: center; gap: 4px; flex: none; }
+.stepper button:disabled { opacity: .35; cursor: not-allowed; }
 .stepper button {
   width: 44px; height: 44px;
   border: 1px solid var(--ink);
