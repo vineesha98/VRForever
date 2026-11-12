@@ -738,19 +738,19 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .attend-row input:checked + b { background: var(--sindoor); border-color: var(--sindoor); color: var(--paper); }
 .attend-row input:focus-visible + b { outline: 2px solid var(--sindoor); outline-offset: 2px; }
 
-.party { display: flex; align-items: center; justify-content: space-between; gap: 12px; transition: opacity .3s; }
-.party.is-muted { opacity: .4; }
-.party > span { margin: 0; }
-.stepper { display: flex; align-items: center; gap: 4px; flex: none; }
-.stepper button:disabled { opacity: .35; cursor: not-allowed; }
-.stepper button {
-  width: 44px; height: 44px;
-  border: 1px solid var(--ink);
-  border-radius: 50%;
-  font-size: 1.3rem;
-  line-height: 1;
+.plus-one { border: 0; padding: 0; margin: 0 0 1.1em; min-width: 0; }
+.plus-one legend { margin-bottom: .35em; font-size: 1.05rem; }
+.plus-one-options { display: flex; gap: 10px; }
+.plus-one-options label { position: relative; flex: 1; cursor: pointer; }
+.plus-one-options input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.plus-one-options b {
+  display: block; padding: .25em .8em; text-align: center;
+  border: 1px solid var(--ink); border-radius: 999px; font-weight: 400;
+  transition: background-color .2s, color .2s;
 }
-.stepper output { min-width: 1.8em; text-align: center; font-size: 1.4rem; font-variant-numeric: tabular-nums lining-nums; }
+.plus-one-options input:checked + b { background: var(--sindoor); color: var(--paper); border-color: var(--sindoor); }
+.plus-one-options input:focus-visible + b { outline: 2px solid var(--sindoor); outline-offset: 3px; }
+.plus-one-note { margin-top: .35em; font-size: .9rem; font-style: italic; opacity: .8; }
 
 .trap { position: absolute; left: -9999px; }
 
