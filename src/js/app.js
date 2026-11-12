@@ -384,21 +384,7 @@
 
   const form = $("rsvpForm");
   const thanks = $("thanks");
-  let party = 1;
-
   if (SITE.replyBy) $("replyBy").textContent = `Please reply by ${SITE.replyBy}.`;
-
-  function setParty(n) {
-    party = Math.max(1, Math.min(2, n));
-    $("partyCount").textContent = party;
-    $("partyMinus").disabled = party === 1;
-    $("partyPlus").disabled = party === 2;
-    Sound.init();
-    Sound.tick();
-  }
-  $("partyMinus").addEventListener("click", () => setParty(party - 1));
-  $("partyPlus").addEventListener("click", () => setParty(party + 1));
-  $("partyMinus").disabled = true;
 
   function readForm() {
     const data = new FormData(form);
@@ -407,7 +393,7 @@
       haldi: data.get("haldi"),
       sangeeth: data.get("sangeeth"),
       wedding: data.get("wedding"),
-      party,
+      party: data.get("plusOne") === "yes" ? 2 : 1,
       contact: String(data.get("contact") || "").trim(),
       note: String(data.get("note") || "").trim(),
     };
@@ -426,10 +412,8 @@
     $("fName").value = saved.name || "";
     $("fContact").value = saved.contact || "";
     $("fNote").value = saved.note || "";
-    party = Math.max(1, Math.min(2, Number(saved.party) || 1));
-    $("partyCount").textContent = party;
-    $("partyMinus").disabled = party === 1;
-    $("partyPlus").disabled = party === 2;
+    const savedPlusOne = form.querySelector(`[name="plusOne"][value="${Number(saved.party) >= 2 ? "yes" : "no"}"]`);
+    if (savedPlusOne) savedPlusOne.checked = true;
     ["haldi", "sangeeth", "wedding"].forEach((name) => {
       const input = form.querySelector(`[name=${name}][value=${saved[name]}]`);
       if (input) input.checked = true;
